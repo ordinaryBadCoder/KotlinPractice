@@ -1,37 +1,48 @@
 package org.example.polymorphism
 
 import java.util.Date
+import kotlin.math.round
 
 fun main() {
 
-    //ad hoc - полиморфизм по случаю
-
     val creationDate = Date()
-    val notes = NotesAppItem()
 
     //Заметка № 1
-    notes.addItemToCell(
+    val messageItem: NotesAppItem= NotesAppItem.MessageItem(
         "call sister",
         creationDate,
         "message",
-        "call sister to congratulate"
+        "call sister to congratulate",
     )
-    println()
 
-    //Заметка № 2, добавляем новый номер телефона
-    notes.addItemToCell(
-        "phone number my sister",
+    //Заметка № 2 - добавляем номер телефона
+    val phoneItem: NotesAppItem = NotesAppItem.PhoneItem(
+        "sister's number",
         creationDate,
         "phone",
-        89085634511
+        89914424242,
     )
-    println()
 
-    //Заметка № 3, список дел
-    notes.addItemToCell(
-        "my todo list",
+    //Заметка № 3 - список дел
+    val toDoListItem: NotesAppItem = NotesAppItem.ToDoListItem(
+        "todolist",
         creationDate,
-        "todo",
-        listOf("wash dog", "clean the room", "buy new shoes")
+        "list",
+        listOf("wash dog", "do the cleaning", "buy new shoes"),
     )
+
+//    //Вызываем методы
+//    println(messageItem.getItemData())
+//    println(phoneItem.getItemData())
+//    println(toDoListItem.getItemData())
+
+    val list = arrayOf<NotesAppItem>(messageItem, phoneItem, toDoListItem)
+
+    fun showAllNotes(notes: Array<NotesAppItem>){
+        notes.forEach {
+            println(it.getItemData())
+        }
+    }
+
+    showAllNotes(list)
 }
